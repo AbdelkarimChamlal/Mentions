@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Mentions</div>
+        <div class="channels">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png" alt="Slack">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968875.png" alt="Jira">
+
+        </div>
+    </header>
+
+    <section class="main">
+        <div class="pipe" id="mentions">
+            <div class="pipe-header">
+                Mentions
+            </div>
+            <div class="pipe-items"  ondrop="drop(event)" ondragover="dragable(event)">
+                <div class="pipe-item" id="1" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum dolor sit amet consectetur adipisicing e eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968875.png" alt="Github"></div>
+                </div>
+                <div class="pipe-item" id="2" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum dolor sit amet  elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github"></div>
+                </div>
+                <div class="pipe-item" id="3" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png" alt="Github"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="pipe" id="processing">
+            <div class="pipe-header">
+                Processing
+            </div>
+            <div class="pipe-items"  ondrop="drop(event)" ondragover="dragable(event)">
+                <div class="pipe-item" id="4" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum dolor  elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github"></div>
+                </div>
+                <div class="pipe-item" id="5" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum  adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png" alt="Github"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="pipe" id="done">
+            <div class="pipe-header">
+                Done
+            </div>
+            <div class="pipe-items"  ondrop="drop(event)" ondragover="dragable(event)">
+                <div class="pipe-item" id="6" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content"> sit amet consectetur adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968875.png" alt="Github"></div>
+                </div>
+                <div class="pipe-item" id="7" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem  amet consectetur adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="Github"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="pipe" id="on-hold">
+            <div class="pipe-header">
+                On Hold
+            </div>
+            <div class="pipe-items"  ondrop="drop(event)" ondragover="dragable(event)">
+                <div class="pipe-item" id="8" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum  adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png" alt="Github"></div>
+                </div>
+                <div class="pipe-item" id="9" ondragstart="drag(event)" draggable="true">
+                    <div class="pipe-item-content">Lorem ipsum dolor  consectetur adipisicing elit. Officia eius vel unde facilis...</div>
+                    <div class="pipe-item-publisher">By Madani Mounir</div>
+                    <div class="pipe-item-platform"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png" alt="Github"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script src="app.js"></script>
+</html>
