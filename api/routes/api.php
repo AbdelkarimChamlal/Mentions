@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/log', [App\Http\Controllers\WebhookController::class, 'log']);
+Route::post('/log', [App\Http\Controllers\WebhookController::class, 'log']);
