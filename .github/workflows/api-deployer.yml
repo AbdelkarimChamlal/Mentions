@@ -20,7 +20,7 @@ jobs:
           script: |
             cd ${{ secrets.MENTION_PATH }}
             git pull origin main
-            cd ${{ secrets.MENTION_PATH }}/api
+            cd api
             composer install
             php artisan migrate
             php artisan optimize
