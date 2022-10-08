@@ -30,3 +30,5 @@ Route::get('/github/callback', function(Github $github){
     $response = $github->exchange_code_for_token($code);
     return $response;
 });
+
+Route::prefix('github')->group(base_path('routes/platforms/github.php'));

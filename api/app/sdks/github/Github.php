@@ -81,6 +81,31 @@ class Github
         ];
     }
 
+    public function get_user($access_token)
+    {
+        $response = $this->requests->get_user_request($access_token);
+        if($response['http_code'] >= 400){
+            return [
+                'error' => true,
+                'data' => $this->format_error($response['body'])
+            ];
+        }
+
+        $body = json_decode($response['body'], true);
+        
+        return [
+            'error' => false,
+            'data' => [
+                "username" => $body['login'],
+                "id" => $body['id'],
+                "avatar" => $body['avatar_url'],
+                "link" => $body['html_url'],
+                "type" => $body['type'],
+                "name" => $body['name'],
+                "email" => $body['email'],
+            ]
+        ];
+    }
 
 
 

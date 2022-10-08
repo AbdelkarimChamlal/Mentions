@@ -57,6 +57,29 @@ class Requests
         return $this->curl_prepare_response($curl);
     }
 
+    public function get_user_request($access_token)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://api.github.com/user',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'GET',
+          CURLOPT_HTTPHEADER => array(
+            'Accept: application/json',
+            'Authorization: Bearer '. $access_token,
+          ),
+        ));
+
+        return $this->curl_prepare_response($curl);
+    }
+                
+
 
     /**
      * formats the curl reponse in a uniform way so that all the responses are in the same format
