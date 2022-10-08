@@ -3,6 +3,7 @@
 namespace App\services;
 
 use App\Models\Account;
+use App\Models\Mention;
 use App\sdks\github\Github;
 
 class GithubServices
@@ -112,22 +113,48 @@ class GithubServices
     {
         $action = $payload['action'];
 
-        // swtich($action){
-        //     case 'created':
-        //         $this->handle_issue_comment_created($payload);
-        //         break;
-        //     case 'edited':
-        //         $this->handle_issue_comment_edited($payload);
-        //         break;
-        //     case 'deleted':
-        //         $this->handle_issue_comment_deleted($payload);
-        //         break;
-        //     default:
-        //         break;
-        // }
+        switch($action){
+            case 'created':
+                $this->handle_issue_comment_created($payload['issue'], $payload['comment'], $payload['sender']);
+                break;
+            default:
+                break;
+        }
     }
 
+    private function handle_issue_comment_created($issue, $comment, $sender)
+    {
+        $comment_body = $comment['body'];
 
+        // extract all @username from comment body
+        $mentions = $this->extract_mentions($comment_body);
+
+        foreach($mentions as $mention){
+            $mention = str_replace('@', '', $mention);
+            $account = Account::where([
+                'username' => $mention,
+                'platform' => 'github'
+            ])->first();
+
+            if($account){
+                $mention_db = new Mention();
+                $mention_db->user_id = $account->user_id;
+                $mention_db->platform = 'github';
+                $mention_db->platform_id = $comment['id'];
+                $mention_db->content = $comment_body;
+                $mention_db->url = $comment['html_url'];
+                $mention_db->sender_name = $sender['login'];
+                $mention_db->sender_username = $sender['login'];
+                $mention_db->sender_avatar = $sender['avatar_url'];
+                $mention_db->sender_url = $sender['html_url'];
+                $mention_db->type = 'issue_comment';
+                $mention_db->status = 'unread';
+                $mention_db->account_id = $account->id;
+                $mention_db->save();
+            }
+            
+        }
+    }
 
 
     private function handle_pull_request($payload)
@@ -161,6 +188,16 @@ class GithubServices
     }
 
 
+    private function extract_mentions($body)
+    {
+        $mentions = [];
+        $pattern = '/@([a-zA-Z0-9_]+)/';
+        preg_match_all($pattern, $body, $matches);
+        if($matches){
+            $mentions = $matches[1];
+        }
+        return $mentions;
+    }
 
 
 }

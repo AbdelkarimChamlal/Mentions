@@ -1,5 +1,6 @@
 <?php
 
+use App\sdks\github\Github;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/log', [App\Http\Controllers\WebhookController::class, 'log']);
-Route::post('/log', [App\Http\Controllers\WebhookController::class, 'log']);
+Route::post('/log', function(Request $request, Github $github){
+    $github_service = new \App\services\GithubServices($github);
+    $github_service->handle_webhook($request);
+    return response()->json(['success' => true]);
+});
