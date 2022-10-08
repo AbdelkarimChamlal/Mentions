@@ -1,6 +1,6 @@
 <?php
 
-use sdks\github\Github;
+use App\sdks\github\Github;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 

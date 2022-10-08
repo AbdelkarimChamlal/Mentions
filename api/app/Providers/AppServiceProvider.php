@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\sdks\github\Github;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 "notifications",
                 "read:user",
             ];
-            return new \sdks\github\Github(config('services.github.client_id'), config('services.github.client_secret'), config('services.github.redirect_uri'), $scopes);
+            return new Github(config('services.github.client_id'), config('services.github.client_secret'), config('services.github.redirect_uri'), $scopes);
         });
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace sdks\github;
+namespace App\sdks\github;
 
-use sdks\github\Requests;
+use App\sdks\github\Requests;
+
 
 class Github
 {
@@ -18,7 +19,7 @@ class Github
         $this->client_secret = $client_secret;
         $this->redirect_uri = $redirect_uri;
         $this->scope = $scopes;
-        $this->requests = new \sdks\github\Requests();
+        $this->requests = new Requests();
     }
 
     public function getAuthUrl()

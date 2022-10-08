@@ -1,6 +1,6 @@
 <?php
 
-namespace sdks\github;
+namespace App\sdks\github;
 
 class Requests
 {
