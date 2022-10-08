@@ -39,18 +39,19 @@ class Github
             ];
         }
 
-        $data = $response['body'];
-        $data = explode("&", $data);
-        $data = array_map(function($item){
-            $item = explode("=", $item);
-            return [
-                $item[0] => $item[1]
-            ];
-        }, $data);
+        $body = $response['body'];
+        $body_items = explode("&", $body);
+
+
+        $access_data = [];
+        foreach($body_items as $data){
+            $data = explode("=", $data);
+            $access_data[$data[0]] = $data[1];
+        }
 
         return [
             'error' => false,
-            'data' => $data
+            'data' => $access_data
         ];
     }
 
