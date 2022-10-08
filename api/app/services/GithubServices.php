@@ -43,8 +43,9 @@ class GithubServices
         return $account;
     }
 
-    public static function refresh_access_data($account, Github $github)
+    public static function refresh_access_data($account)
     {
+        $github = app()->make(Github::class);
         $access_data = json_decode($account->access_data, true);
         $refresh_token = $access_data['refresh_token'];
         $response = $github->refresh_access_token($refresh_token);
