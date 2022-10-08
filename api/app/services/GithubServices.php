@@ -110,8 +110,25 @@ class GithubServices
 
     private function handle_issue_comment($payload)
     {
+        $action = $payload['action'];
 
+        // swtich($action){
+        //     case 'created':
+        //         $this->handle_issue_comment_created($payload);
+        //         break;
+        //     case 'edited':
+        //         $this->handle_issue_comment_edited($payload);
+        //         break;
+        //     case 'deleted':
+        //         $this->handle_issue_comment_deleted($payload);
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
+
+
+
 
     private function handle_pull_request($payload)
     {
