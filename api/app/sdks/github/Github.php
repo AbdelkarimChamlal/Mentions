@@ -39,11 +39,18 @@ class Github
             ];
         }
 
-        $data = json_decode($response['body'], true);
+        $data = $response['body'];
+        $data = explode("&", $data);
+        $data = array_map(function($item){
+            $item = explode("=", $item);
+            return [
+                $item[0] => $item[1]
+            ];
+        }, $data);
 
         return [
             'error' => false,
-            'data' => $response
+            'data' => $data
         ];
     }
 

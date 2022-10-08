@@ -15,15 +15,12 @@ class Requests
             'code' => $code,
             'redirect_uri' => $redirect_uri
         ];
-        $headers = [
-            'Accept' => 'application/json'
-        ];
+
         
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         return $this->curl_prepare_response($curl);
