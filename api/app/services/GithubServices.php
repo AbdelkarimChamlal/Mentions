@@ -8,7 +8,7 @@ use App\sdks\github\Github;
 
 class GithubServices
 {
-    private static $github;
+    private $github;
 
     public function __construct(\App\sdks\github\Github $github)
     {
