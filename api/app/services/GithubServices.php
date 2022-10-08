@@ -3,6 +3,7 @@
 namespace App\services;
 
 use App\Models\Account;
+use App\sdks\github\Github;
 
 class GithubServices
 {
@@ -42,11 +43,11 @@ class GithubServices
         return $account;
     }
 
-    public static function refresh_access_data($account)
+    public static function refresh_access_data($account, Github $github)
     {
         $access_data = json_decode($account->access_data, true);
         $refresh_token = $access_data['refresh_token'];
-        $response = self::$github->refresh_access_token($refresh_token);
+        $response = $github->refresh_access_token($refresh_token);
 
         if($response['error']){
             $account->status = "inactive";
