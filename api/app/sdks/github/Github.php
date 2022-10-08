@@ -43,7 +43,7 @@ class Github
 
         return [
             'error' => false,
-            'data' => $data
+            'data' => $response
         ];
     }
 
