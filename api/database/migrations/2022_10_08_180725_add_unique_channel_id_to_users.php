@@ -14,7 +14,7 @@ class AddUniqueChannelIdToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('channel_id')->nullable()->unique();
+            // $table->text('channel_id')->nullable()->unique();
         });
     }
 
