@@ -27,12 +27,12 @@ Route::get('/callback', function(Github $github, Request $request){
 
     if($account_details_response['error']){
         return $account_details_response;
-        return redirect('/home')->with('error', "Sorry, we couldn't log you in. Please try again.");
+        return redirect('/dashboard')->with('error', "Sorry, we couldn't log you in. Please try again.");
     }
 
     $account_details = $account_details_response['data'];
     $account = GithubServices::updateOrCreateAccount($user, $account_details, $access_data);
 
     return $account;
-    return redirect('/home')->with('success', "You have successfully linked your github Account.");
+    return redirect('/dashboard')->with('success', "You have successfully linked your github Account.");
 });

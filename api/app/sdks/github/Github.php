@@ -84,7 +84,6 @@ class Github
     public function get_user($access_token)
     {
         $response = $this->requests->get_user_request($access_token);
-        dd($response);
         if($response['http_code'] >= 400){
             return [
                 'error' => true,
