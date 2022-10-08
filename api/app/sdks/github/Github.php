@@ -55,6 +55,35 @@ class Github
         ];
     }
 
+
+    public function refresh_access_token($refresh_token)
+    {
+        $response = $this->requests->refresh_access_token_request($this->client_id, $this->client_secret, $refresh_token);
+        if($response['http_code'] >= 400){
+            return [
+                'error' => true,
+                'data' => $this->format_error($response['body'])
+            ];
+        }
+
+        $body = json_decode($response['body'], true);
+        
+        return [
+            'error' => false,
+            'data' => [
+                "access_token" => $body['access_token'],
+                "token_type" => $body['token_type'],
+                "expires_in" => $body['expires_in'],
+                "scope" => $body['scope'],
+                "refresh_token" => $body['refresh_token'],
+                "refresh_token_expires_in" => $body['refresh_token_expires_in']
+            ]
+        ];
+    }
+
+
+
+
     /**
      * Used to format all github api responses in a uniform way
      * 
