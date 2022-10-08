@@ -73,6 +73,7 @@ class Requests
           CURLOPT_HTTPHEADER => array(
             'Accept: application/json',
             'Authorization: Bearer '. $access_token,
+            'User-Agent: '. $_SERVER['HTTP_USER_AGENT']
           ),
         ));
 
