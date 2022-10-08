@@ -43,11 +43,7 @@ class Github
 
         return [
             'error' => false,
-            'data' => [
-                "access_token" => $data['access_token'],
-                "token_type" => $data['token_type'],
-                "scope" => $data['scope']
-            ]
+            'data' => $data
         ];
     }
 
