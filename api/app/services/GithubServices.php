@@ -6,7 +6,7 @@ use App\Models\Account;
 
 class GithubServices
 {
-    private $github;
+    private static $github;
 
     public function __construct(\App\sdks\github\Github $github)
     {
@@ -36,10 +36,32 @@ class GithubServices
         $account->profile_link = $account_details['link'];
         $account->access_data = json_encode($access_data);
         $account->access_data_last_updated = time();
+        $account->status = "active";
         $account->save();
 
         return $account;
     }
+
+    public static function refresh_access_data($account)
+    {
+        $access_data = json_decode($account->access_data, true);
+        $refresh_token = $access_data['refresh_token'];
+        $response = self::$github->refresh_access_token($refresh_token);
+
+        if($response['error']){
+            $account->status = "inactive";
+            $account->save();
+            return false;
+        }
+
+        $access_data = $response['data'];
+        $account->access_data = json_encode($access_data);
+        $account->access_data_last_updated = time();
+        $account->status = "active";
+        $account->save();
+
+        return $account;
+    }   
 
     public function handle_webhook($request)
     {

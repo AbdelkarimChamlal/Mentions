@@ -5,7 +5,6 @@ namespace App\sdks\github;
 class Requests
 {
 
-
     public function exchange_code_for_token_request($client_id, $client_secret, $code, $redirect_uri)
     {
         $url = "https://github.com/login/oauth/access_token";

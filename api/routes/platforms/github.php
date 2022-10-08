@@ -1,17 +1,20 @@
 <?php
 
+use App\Models\Account;
 use App\sdks\github\Github;
+use Illuminate\Http\Request;
 use App\services\GithubServices;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 
-Route::get('/login', function(Github $github){
+Route::get('/login', function(Github $github)
+{
     $url = $github->getAuthUrl();
     return redirect($url);
 });
 
-Route::get('/callback', function(Github $github, Request $request){
+Route::get('/callback', function(Github $github, Request $request)
+{
     $code = $_GET['code'];
     $user = $request->user();
     $response = $github->exchange_code_for_token($code);
@@ -32,4 +35,11 @@ Route::get('/callback', function(Github $github, Request $request){
     $account = GithubServices::updateOrCreateAccount($user, $account_details, $access_data);
 
     return redirect('/dashboard')->with('success', "You have successfully linked your github Account.");
+});
+
+Route::get('/sandbox', function(Github $github, Request $request)
+{
+    $account = Account::find(1);
+    $account = GithubServices::refresh_access_data($account);
+    return $account;
 });
