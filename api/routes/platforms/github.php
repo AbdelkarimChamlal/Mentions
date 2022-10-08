@@ -17,7 +17,6 @@ Route::get('/callback', function(Github $github, Request $request){
     $response = $github->exchange_code_for_token($code);
 
     if($response['error']){
-        return $response;
         return redirect('/home')->with('error', "Sorry, we couldn't log you in. Please try again.");
     }
 
@@ -26,13 +25,11 @@ Route::get('/callback', function(Github $github, Request $request){
     $account_details_response = $github->get_user($access_token);
 
     if($account_details_response['error']){
-        return $account_details_response;
         return redirect('/dashboard')->with('error', "Sorry, we couldn't log you in. Please try again.");
     }
 
     $account_details = $account_details_response['data'];
     $account = GithubServices::updateOrCreateAccount($user, $account_details, $access_data);
 
-    return $account;
     return redirect('/dashboard')->with('success', "You have successfully linked your github Account.");
 });
