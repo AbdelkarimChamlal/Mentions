@@ -32,3 +32,11 @@ Route::get('/github/callback', function(Github $github){
 });
 
 Route::prefix('github')->group(base_path('routes/platforms/github.php'));
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
