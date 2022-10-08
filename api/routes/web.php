@@ -1,6 +1,8 @@
 <?php
 
+use sdks\github\Github;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+
+
+Route::get('/redirect', function(Github $github){
+    Redirect::to($github->getAuthUrl());
+});
+
+Route::get('/github/callback', function(Github $github){
+    $code = $_GET['code'];
+    $response = $github->exchange_code_for_token($code);
+    return $response;
 });
