@@ -2,7 +2,6 @@
 
 use App\sdks\github\Github;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +21,8 @@ Route::get('/', function () {
 
 
 Route::get('/redirect', function(Github $github){
-    Redirect::to($github->getAuthUrl());
+    $url = $github->getAuthUrl();
+    return redirect($url);
 });
 
 Route::get('/github/callback', function(Github $github){
