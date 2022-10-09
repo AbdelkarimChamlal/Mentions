@@ -27,9 +27,9 @@ Route::post('/log', function(Request $request, Github $github){
 });
 
 
-Route::middleware('auth')->get('/mentions', [App\Http\Controllers\api\MentionsController::class, 'index']);
-Route::middleware('auth')->put('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'update']);
-Route::middleware('auth')->delete('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
+Route::middleware('auth:sanctum')->get('/mentions', [App\Http\Controllers\api\MentionsController::class, 'index']);
+Route::middleware('auth:sanctum')->put('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
 
-Route::middleware('auth')->get('/accounts', [App\Http\Controllers\api\MentionsController::class, 'index']);
-Route::middleware('auth')->delete('/accounts/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
+Route::middleware('auth:sanctum')->get('/accounts', [App\Http\Controllers\api\MentionsController::class, 'index']);
+Route::middleware('auth:sanctum')->delete('/accounts/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
