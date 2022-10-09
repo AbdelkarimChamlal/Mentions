@@ -31,5 +31,5 @@ Route::middleware('auth.basic')->get('/mentions', [App\Http\Controllers\api\Ment
 Route::middleware('auth.basic')->put('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'update']);
 Route::middleware('auth.basic')->delete('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
 
-Route::middleware('auth.basic')->get('/accounts', [App\Http\Controllers\api\MentionsController::class, 'index']);
-Route::middleware('auth.basic')->delete('/accounts/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
+Route::middleware('auth.basic')->get('/accounts', [App\Http\Controllers\api\AccountsController::class, 'index']);
+Route::middleware('auth.basic')->delete('/accounts/{id}', [App\Http\Controllers\api\AccountsController::class, 'delete']);
