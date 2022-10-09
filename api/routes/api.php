@@ -25,3 +25,11 @@ Route::post('/log', function(Request $request, Github $github){
     $github_service->handle_webhook($request);
     return response()->json(['success' => true]);
 });
+
+
+Route::middleware('auth')->get('/mentions', [App\Http\Controllers\api\MentionsController::class, 'index']);
+Route::middleware('auth')->put('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'update']);
+Route::middleware('auth')->delete('/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
+
+Route::middleware('auth')->get('/accounts', [App\Http\Controllers\api\MentionsController::class, 'index']);
+Route::middleware('auth')->delete('/accounts/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);

@@ -7,13 +7,13 @@ use App\services\GithubServices;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/login', function(Github $github)
+Route::middleware('auth')->get('/login', function(Github $github)
 {
     $url = $github->getAuthUrl();
     return redirect($url);
 });
 
-Route::get('/callback', function(Github $github, Request $request)
+Route::middleware('auth')->get('/callback', function(Github $github, Request $request)
 {
     $code = $_GET['code'];
     $user = $request->user();
