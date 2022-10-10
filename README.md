@@ -12,5 +12,5 @@ Backend: Laravel since I think it can work for this project by using it to creat
 Frontend: Not sure yet. there are many JS libraries and frameworks I want to try so not sure yet.
 
 ## Simple Client Design
-![enter image description here](https://im5.ezgif.com/tmp/ezgif-5-d2101cbd55.gif)
+![enter image description here](https://media-exp1.licdn.com/dms/image/C4E22AQE91FkcNWe29w/feedshare-shrink_2048_1536/0/1664625888072?e=1668038400&v=beta&t=cO9c7Lo8159pgFiyz0yLoThJ4tNFexv5bQwE1eHIEwE)
 
