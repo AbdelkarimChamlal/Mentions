@@ -141,7 +141,7 @@ class GithubServices
                 $max_order = Mention::where([
                     'account_id' => $account->id,
                     'platform' => 'github',
-                    'column' => 'new mentions'
+                    'column' => 'new'
                 ])->max('order') ?? 0;
 
                 $mention_db = new Mention();
