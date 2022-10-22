@@ -142,8 +142,7 @@ class GithubServices
                 $new_mentions_column = Column::where([
                     'user_id' => $account->user_id,
                     'type' => 'new_mentions'
-                ])->first()->id;
-
+                ])->first();
 
                 $max_order = Mention::where([
                     'account_id' => $account->id,
