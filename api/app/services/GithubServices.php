@@ -2,10 +2,12 @@
 
 namespace App\services;
 
-use App\Models\Account;
 use App\Models\Column;
+use App\Models\Account;
 use App\Models\Mention;
 use App\sdks\github\Github;
+use App\Events\ResourceUpdateEvent;
+use App\Models\User;
 
 class GithubServices
 {
@@ -170,6 +172,7 @@ class GithubServices
                 $mention_db->save();
 
                 //TODO broadcast to user that he has new mention
+                ResourceUpdateEvent::dispatch(User::find($account->user_id), 'mentions', 'added', $mention_db->id);
             }
             
         }
