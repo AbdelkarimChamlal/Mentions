@@ -14,7 +14,7 @@ class ResourceUpdateEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     private $user;
-    public $reousrce;
+    public $resource;
     public $action;
     public $id;
 
