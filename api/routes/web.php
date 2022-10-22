@@ -43,17 +43,3 @@ Route::middleware([
 });
 
 
-Route::get('/api/log', [App\Http\Controllers\WebhookController::class, 'log']);
-Route::post('/api/log', function(Request $request, Github $github){
-    $github_service = new \App\services\GithubServices($github);
-    $github_service->handle_webhook($request);
-    return response()->json(['success' => true]);
-});
-
-
-Route::middleware('auth')->get('/api/mentions', [App\Http\Controllers\api\MentionsController::class, 'index']);
-Route::middleware('auth')->put('/api/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'update']);
-Route::middleware('auth')->delete('/api/mentions/{id}', [App\Http\Controllers\api\MentionsController::class, 'delete']);
-
-Route::middleware('auth')->get('/api/accounts', [App\Http\Controllers\api\AccountsController::class, 'index']);
-Route::middleware('auth')->delete('/api/accounts/{id}', [App\Http\Controllers\api\AccountsController::class, 'delete']);
