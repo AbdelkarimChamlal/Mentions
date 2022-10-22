@@ -139,10 +139,16 @@ class GithubServices
 
             if($account){
 
+                $new_mentions_column = Column::where([
+                    'user_id' => $account->user_id,
+                    'type' => 'new_mentions'
+                ])->first()->id;
+
+
                 $max_order = Mention::where([
                     'account_id' => $account->id,
                     'platform' => 'github',
-                    'column' => 'new'
+                    'column_id' =>  $new_mentions_column->id
                 ])->max('order') ?? 0;
 
                 $mention_db = new Mention();
@@ -159,10 +165,7 @@ class GithubServices
                 $mention_db->status = 'unread';
                 $mention_db->account_id = $account->id;
                 
-                $mention_db->column_id = Column::where([
-                    'user_id' => $account->user_id,
-                    'type' => 'new_mentions'
-                ])->first()->id;
+                $mention_db->column_id = $new_mentions_column->id;
 
                 $mention_db->order = $max_order + 1;
                 $mention_db->save();
