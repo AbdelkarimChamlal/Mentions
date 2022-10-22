@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 class ResourceUpdateEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user;
+    private $user;
     public $reousrce;
     public $action;
     public $id;
