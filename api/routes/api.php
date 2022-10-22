@@ -33,3 +33,10 @@ Route::middleware('auth.basic')->delete('/mentions/{id}', [App\Http\Controllers\
 
 Route::middleware('auth.basic')->get('/accounts', [App\Http\Controllers\api\AccountsController::class, 'index']);
 Route::middleware('auth.basic')->delete('/accounts/{id}', [App\Http\Controllers\api\AccountsController::class, 'delete']);
+
+
+Route::middleware('auth.basic')->get('/columns', [App\Http\Controllers\api\ColumnsController::class, 'index']);
+Route::middleware('auth.basic')->get('/columns/{id}', [App\Http\Controllers\api\ColumnsController::class, 'show']);
+Route::middleware('auth.basic')->put('/columns/{id}', [App\Http\Controllers\api\ColumnsController::class, 'update']);
+Route::middleware('auth.basic')->post('/columns', [App\Http\Controllers\api\ColumnsController::class, 'store']);
+Route::middleware('auth.basic')->delete('/columns/{id}', [App\Http\Controllers\api\ColumnsController::class, 'delete']);
