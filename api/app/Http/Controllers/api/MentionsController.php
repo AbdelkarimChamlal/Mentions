@@ -10,14 +10,6 @@ use App\Http\Resources\MentionResource;
 class MentionsController extends Controller
 {
 
-    private $supported_columns = 
-    [
-        'new',
-        'processing',
-        'done',
-        'archived'
-    ];
-    
     public function index(Request $request)
     {
         $user = $request->user();
@@ -27,7 +19,7 @@ class MentionsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'column' => 'required|in:' . implode(',', $this->supported_columns),
+            'columnId' => 'required|exists:columns,id',
             'order' => 'required|integer'
         ]);
 
@@ -35,7 +27,8 @@ class MentionsController extends Controller
 
         $mention = Mention::where([
             'id' => $id,
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'column_id' => $request->columnId
         ])->first();
 
         if(!$mention){
@@ -44,10 +37,9 @@ class MentionsController extends Controller
             ], 404);
         }
 
-        $mention->column = $request->column;
+        $mention->column_id = $request->columnId;
         $mention->order = $request->order;
         $mention->save();
-
 
         return MentionResource::make($mention);
     }

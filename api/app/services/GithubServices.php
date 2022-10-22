@@ -3,6 +3,7 @@
 namespace App\services;
 
 use App\Models\Account;
+use App\Models\Column;
 use App\Models\Mention;
 use App\sdks\github\Github;
 
@@ -157,7 +158,12 @@ class GithubServices
                 $mention_db->type = 'issue_comment';
                 $mention_db->status = 'unread';
                 $mention_db->account_id = $account->id;
-                $mention_db->column = 'new mentions';
+                
+                $mention_db->column_id = Column::where([
+                    'user_id' => $account->user_id,
+                    'type' => 'new_mentions'
+                ])->first()->id;
+
                 $mention_db->order = $max_order + 1;
                 $mention_db->save();
 

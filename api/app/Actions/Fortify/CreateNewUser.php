@@ -2,6 +2,7 @@
 
 namespace App\Actions\Fortify;
 
+use App\Models\Column;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Jetstream;
@@ -36,6 +37,13 @@ class CreateNewUser implements CreatesNewUsers
 
         $user->channel_id = Str::random(32);
         $user->save();
+
+        $new_mentions_column = New Column();
+        $new_mentions_column->user_id = $user->id;
+        $new_mentions_column->name = "New Mentions";
+        $new_mentions_column->type = "new_mentions";
+        $new_mentions_column->order = 1;
+        $new_mentions_column->save();
 
         return $user;
     }
