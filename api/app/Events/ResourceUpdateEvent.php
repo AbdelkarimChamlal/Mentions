@@ -33,7 +33,7 @@ class ResourceUpdateEvent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return '.update';
+        return 'update';
     }
 
     /**
