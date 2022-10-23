@@ -27,8 +27,7 @@ class MentionsController extends Controller
 
         $mention = Mention::where([
             'id' => $id,
-            'user_id' => $user->id,
-            'column_id' => $request->columnId
+            'user_id' => $user->id
         ])->first();
 
         if(!$mention){
