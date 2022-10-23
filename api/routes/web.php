@@ -1,7 +1,7 @@
 <?php
 
 use App\sdks\github\Github;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
