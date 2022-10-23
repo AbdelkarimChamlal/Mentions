@@ -13,7 +13,7 @@ class ColumnsController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $columns = Column::where('user_id', $user->id)->orderBy('order', 'asc')->get();
+        $columns = Column::where('user_id', $user->id)->with('mentions')->orderBy('order', 'asc')->get();
         return response()->json($columns);
     }
 
