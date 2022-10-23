@@ -44,12 +44,13 @@ Route::middleware([
 });
 
 
-Route::get('/slack/webhooks', function(Request $request){
-    Log::info($request->all());
-    return response()->json(['success' => true]);
-});
-
 Route::post('/slack/webhooks', function(Request $request){
     Log::info($request->all());
+    $challenge = $request->input('challenge');
+    if($challenge){
+        // response in plain text
+        return response($challenge, 200)->header('Content-Type', 'text/plain');
+    }
+    // challenge is not present, so this is a normal event
     return response()->json(['success' => true]);
 });
