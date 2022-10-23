@@ -27,7 +27,7 @@ class MentionResource extends JsonResource
             "senderUsername" => $this->sender_username,
             "senderProfileUrl" => $this->sender_url,
             "senderAvatar" => $this->sender_avatar,
-            "column" => $this->column,
+            "columnId" => $this->column_id,
             "order" => $this->order,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
