@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Column;
 use App\Models\Mention;
 use Illuminate\Http\Request;
+use App\Events\ResourceUpdateEvent;
 use App\Http\Controllers\Controller;
 
 class ColumnsController extends Controller
@@ -33,6 +34,8 @@ class ColumnsController extends Controller
         $column->order = $request->order ?? $column->order;
         $column->save();
 
+        ResourceUpdateEvent::dispatch($user, 'column', 'updated', $column->id);
+
         return response()->json($column);
     }
 
@@ -51,6 +54,8 @@ class ColumnsController extends Controller
 
         Mention::where('column_id', $column->id)->delete();
         $column->delete();
+
+        ResourceUpdateEvent::dispatch($user, 'column', 'deleted', $column->id);
 
         return response()->json(['success' => 'Column deleted']);
     }
@@ -77,6 +82,7 @@ class ColumnsController extends Controller
         $column->order = Column::where('user_id', $user->id)->count() + 1;
         $column->save();
 
+        ResourceUpdateEvent::dispatch($user, 'column', 'added', $column->id);
         return response()->json($column);
     }
 }

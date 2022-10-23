@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Models\Mention;
 use Illuminate\Http\Request;
+use App\Events\ResourceUpdateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MentionResource;
 
@@ -39,6 +40,7 @@ class MentionsController extends Controller
         $mention->column_id = $request->columnId;
         $mention->order = $request->order;
         $mention->save();
+        ResourceUpdateEvent::dispatch($user, 'mentions', 'updated', $mention->id);
 
         return MentionResource::make($mention);
     }
@@ -58,6 +60,8 @@ class MentionsController extends Controller
         }
 
         $mention->delete();
+        
+        ResourceUpdateEvent::dispatch($user, 'mentions', 'deleted', $mention->id);
 
         return response()->json([
             'message' => 'Mention deleted successfully'
