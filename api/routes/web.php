@@ -2,6 +2,7 @@
 
 use App\sdks\github\Github;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +44,12 @@ Route::middleware([
 });
 
 
+Route::get('/slack/webhooks', function(Request $request){
+    Log::info($request->all());
+    return response()->json(['success' => true]);
+});
+
+Route::post('/slack/webhooks', function(Request $request){
+    Log::info($request->all());
+    return response()->json(['success' => true]);
+});
