@@ -4,6 +4,7 @@ use App\sdks\github\Github;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,13 +58,9 @@ Route::post('/slack/webhooks', function(Request $request){
 
 
 Route::get('/slack/login', function(){
-    $login_url = "https://slack.com/openid/connect/authorize?openid/connect/authorize?
-    response_type=code
-    &scope=openid%20profile%20email
-    &client_id=".config('services.slack.client_id')."
-    &redirect_uri=".urlencode(config('services.slack.redirect_uri'));
+    $login_url = "https://slack.com/openid/connect/authorize?openid/connect/authorize?response_type=code&scope=openid%20profile%20email&client_id=".config('services.slack.client_id')."&redirect_uri=".urlencode(config('services.slack.redirect_uri'));
 
-    return redirect($login_url);
+    return Redirect::to($login_url);
 });
 
 
