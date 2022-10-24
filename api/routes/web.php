@@ -54,3 +54,19 @@ Route::post('/slack/webhooks', function(Request $request){
     // challenge is not present, so this is a normal event
     return response()->json(['success' => true]);
 });
+
+
+Route::get('/slack/login', function(){
+    $login_url = "https://slack.com/openid/connect/authorize?openid/connect/authorize?
+    response_type=code
+    &scope=openid%20profile%20email
+    &client_id=".config('services.slack.client_id')."
+    &redirect_uri=".urlencode(config('services.slack.redirect_uri'));
+
+    return redirect($login_url);
+});
+
+
+Route::get('/slack/callback', function(Request $request){
+    return $request;
+});

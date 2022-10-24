@@ -33,6 +33,12 @@ return [
         "client_id" => env("GITHUB_CLIENT_ID"),
         "client_secret" => env("GITHUB_CLIENT_SECRET"),
         "redirect_uri" => env("GITHUB_REDIRECT_URI"),
-    ]
+    ],
+    'slack' => [
+        "client_id" => env("SLACK_CLIENT_ID"),
+        "client_secret" => env("SLACK_CLIENT_SECRET"),
+        "redirect_uri" => env("SLACK_REDIRECT"),
+    ],
+    
 
 ];
