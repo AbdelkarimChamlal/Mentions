@@ -28,7 +28,3 @@ Route::prefix('slack')->group(base_path('routes/platforms/slack.php'));
 Route::post('/slack/webhooks', [\App\Http\Controllers\web\WebhooksController::class, 'slackWebhooks']);
 Route::post('/github/webhooks', [\App\Http\Controllers\web\WebhooksController::class, 'githubWebhooks']);
 
-
-Route::get('/slack/callback', function(Request $request){
-    return $request;
-});
