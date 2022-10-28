@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Account;
 use App\sdks\github\Github;
 use Illuminate\Http\Request;
 use App\services\GithubServices;
@@ -35,11 +34,4 @@ Route::middleware('auth')->get('/callback', function(Github $github, Request $re
     $account = GithubServices::updateOrCreateAccount($user, $account_details, $access_data);
 
     return redirect('/dashboard')->with('success', "You have successfully linked your github Account.");
-});
-
-Route::get('/sandbox', function(Github $github, Request $request)
-{
-    $account = Account::find(1);
-    $account = GithubServices::refresh_access_data($account);
-    return $account;
 });

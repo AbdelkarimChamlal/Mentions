@@ -22,46 +22,11 @@ Route::get('/', function () {
 });
 
 
-
-Route::get('/redirect', function(Github $github){
-    $url = $github->getAuthUrl();
-    return redirect($url);
-});
-
-Route::get('/github/callback', function(Github $github){
-    $code = $_GET['code'];
-    $response = $github->exchange_code_for_token($code);
-    return $response;
-});
-
 Route::prefix('github')->group(base_path('routes/platforms/github.php'));
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::prefix('slack')->group(base_path('routes/platforms/slack.php'));
 
-
-Route::post('/slack/webhooks', function(Request $request){
-    Log::info($request->all());
-    $challenge = $request->input('challenge');
-    if($challenge){
-        // response in plain text
-        return response($challenge, 200)->header('Content-Type', 'text/plain');
-    }
-    // challenge is not present, so this is a normal event
-    return response()->json(['success' => true]);
-});
-
-
-Route::get('/slack/login', function(){
-    $login_url = "https://slack.com/openid/connect/authorize?openid/connect/authorize?response_type=code&scope=openid%20profile%20email&client_id=".config('services.slack.client_id')."&redirect_uri=".urlencode(config('services.slack.redirect_uri'));
-
-    return Redirect::to($login_url);
-});
+Route::post('/slack/webhooks', [\App\Http\Controllers\web\WebhooksController::class, 'slackWebhooks']);
+Route::post('/github/webhooks', [\App\Http\Controllers\web\WebhooksController::class, 'githubWebhooks']);
 
 
 Route::get('/slack/callback', function(Request $request){
