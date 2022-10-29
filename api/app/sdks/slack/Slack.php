@@ -16,8 +16,6 @@ class Slack
               ];
         }
 
-
-
         $response = json_decode($response['body'], true);
 
         if($response['ok'] == false){
@@ -60,10 +58,35 @@ class Slack
             ];
         }
 
-
         return [
             'error' => false,
             'permalink' => $response['permalink']
+        ];
+    }
+
+
+    public static function getChannel($channel, $token)
+    {
+        $response = Requests::getChannelRequest($channel, $token);
+        if($response['http_code'] != 200){
+           return [
+                'error' => true,
+                'data' => $response['body']
+            ];
+        }
+
+        $response = json_decode($response['body'], true);
+
+        if($response['ok'] == false){
+            return [
+                'error' => true,
+                'data' => $response['error']
+            ];
+        }
+
+        return [
+            'error' => false,
+            'channel' => $response['channel']
         ];
     }
 }

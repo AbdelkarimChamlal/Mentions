@@ -5,7 +5,6 @@ namespace App\Http\Controllers\web;
 use App\sdks\github\Github;
 use Illuminate\Http\Request;
 use App\services\GithubServices;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\services\SlackServices;
 

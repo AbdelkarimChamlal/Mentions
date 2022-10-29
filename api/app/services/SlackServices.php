@@ -53,6 +53,20 @@ class SlackServices
             
             $sender_info = Slack::getUserInfo($sender, $access_token);
             $permlink = Slack::getPermalink($event['channel'], $event['ts'], $access_token);
+            $channel_info = Slack::getChannel($event['channel'], $access_token);
+            $channel_name = $channel_info['channel']['name'] ?? "unknown";
+            // three cases this is either a channel message a channel thread replay or a direct message
+            if($event['channel_type'] == 'channel'){
+                $channel_name = "#".$channel_name;
+            }else if($event['channel_type'] == 'im'){
+                $channel_name = "@".$channel_name;
+            }
+
+            if(isset($event['thread_ts'])){
+                $channel_name .= ":thread_replay";
+            }else{
+                $channel_name .= ":message";
+            }
 
             $db_mention = new Mention();
             $db_mention->user_id = $account->user_id;
@@ -60,7 +74,7 @@ class SlackServices
             $db_mention->platform = 'slack';
             $db_mention->platform_id = $event['client_msg_id'] ?? $event['ts'];
             $db_mention->content = $text;
-            $db_mention->type = 'message';
+            $db_mention->type = $channel_name;
 
             $db_mention->url = $permlink['error'] ? null : $permlink['permalink'];
             $db_mention->sender_name = $sender_info['user']['name'] ?? null;
