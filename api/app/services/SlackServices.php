@@ -13,6 +13,8 @@ class SlackServices
 {
     public static function handleWebHooks($request)
     {
+        Log::info('Slack Webhook Received');
+        Log::info($request->all());
         $events = $request->input('event');
         if($events){
             foreach($events as $event){
@@ -22,10 +24,12 @@ class SlackServices
 
                 $mentions = self::extract_mentions($text);
 
+                Log::info(json_encode($event));
+
                 Log::info($mentions);
 
                 Log::info($text);
-                
+
                 foreach($mentions as $mention){
                     $mention = str_replace('@', '', $mention);
                     $mention = str_replace('<', '', $mention);
