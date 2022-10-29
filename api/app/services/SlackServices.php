@@ -15,7 +15,7 @@ class SlackServices
     public static function handleWebHooks($request)
     {
         $event = $request->input('event');
-
+        Log::info($event);
         if($event['type'] != 'message') return;
         
         $text = $event['text'];
