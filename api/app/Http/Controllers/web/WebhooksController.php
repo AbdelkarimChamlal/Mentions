@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\services\GithubServices;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\services\SlackServices;
 
 class WebhooksController extends Controller
 {
@@ -20,9 +21,7 @@ class WebhooksController extends Controller
 
     public function slackWebhooks(Request $request)
     {
-        Log::info($request->all());
-        // log headers 
-        Log::info($request->headers->all());
+        SlackServices::handleWebHooks($request);
         $challenge = $request->input('challenge');
         if($challenge){
             return response($challenge, 200)->header('content-type', 'text/plain');
