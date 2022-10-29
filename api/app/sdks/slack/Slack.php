@@ -38,4 +38,32 @@ class Slack
             ]
         ];
     }
+
+
+
+    public static function getPermalink($channel, $ts, $token)
+    {
+        $response = Requests::getPermalinkRequest($channel, $ts, $token);
+        if($response['http_code'] != 200){
+           return [
+                'error' => true,
+                'data' => $response['body']
+            ];
+        }
+
+        $response = json_decode($response['body'], true);
+
+        if($response['ok'] == false){
+            return [
+                'error' => true,
+                'data' => $response['error']
+            ];
+        }
+
+
+        return [
+            'error' => false,
+            'permalink' => $response['permalink']
+        ];
+    }
 }

@@ -52,6 +52,7 @@ class SlackServices
             $access_token = json_decode($account->access_data)->access_token;
             
             $sender_info = Slack::getUserInfo($sender, $access_token);
+            $permlink = Slack::getPermalink($event['channel'], $event['ts'], $access_token);
 
             $db_mention = new Mention();
             $db_mention->user_id = $account->user_id;
@@ -61,7 +62,7 @@ class SlackServices
             $db_mention->content = $text;
             $db_mention->type = 'message';
 
-            $db_mention->url = $event['permalink'] ?? null;
+            $db_mention->url = $permlink['error'] ? null : $permlink['permalink'];
             $db_mention->sender_name = $sender_info['user']['name'] ?? null;
             $db_mention->sender_username = $sender_info['user']['real_name'] ?? null;
             $db_mention->sender_avatar = $sender_info['user']['image'] ?? null;
