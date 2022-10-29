@@ -7,6 +7,7 @@ use App\Models\Column;
 use App\Models\Account;
 use App\Models\Mention;
 use App\Events\ResourceUpdateEvent;
+use Illuminate\Support\Facades\Log;
 
 class SlackServices
 {
@@ -21,6 +22,10 @@ class SlackServices
 
                 $mentions = self::extract_mentions($text);
 
+                Log::info($mentions);
+
+                Log::info($text);
+                
                 foreach($mentions as $mention){
                     $mention = str_replace('@', '', $mention);
                     $mention = str_replace('<', '', $mention);
