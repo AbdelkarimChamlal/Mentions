@@ -13,7 +13,7 @@ class SlackServices
 {
     public static function handleWebHooks($request)
     {
-        $events = $request->array('event');
+        $events = $request->input('event');
         Log::info($events);
 
         // if($events){
