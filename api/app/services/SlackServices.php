@@ -7,6 +7,7 @@ use App\Models\Column;
 use App\Models\Account;
 use App\Models\Mention;
 use App\Events\ResourceUpdateEvent;
+use App\sdks\slack\Slack;
 use Illuminate\Support\Facades\Log;
 
 class SlackServices
@@ -47,6 +48,11 @@ class SlackServices
             ])->max('order') ?? 0;
 
 
+            $sender = $event['user'];
+            $access_token = json_decode($account->access_data)->access_token;
+            
+            $sender_info = Slack::getUserInfo($sender, $access_token);
+
             $db_mention = new Mention();
             $db_mention->user_id = $account->user_id;
             $db_mention->account_id = $account->id;
@@ -56,10 +62,10 @@ class SlackServices
             $db_mention->type = 'message';
 
             $db_mention->url = $event['permalink'] ?? null;
-            $db_mention->sender_name = $event['user'] ?? null;
-            $db_mention->sender_username = $event['user'] ?? null;
-            $db_mention->sender_avatar = $event['user'] ?? null;
-            $db_mention->sender_url = $event['user'] ?? null;
+            $db_mention->sender_name = $sender_info['user']['name'] ?? null;
+            $db_mention->sender_username = $sender_info['user']['real_name'] ?? null;
+            $db_mention->sender_avatar = $sender_info['user']['image'] ?? null;
+            $db_mention->sender_url = $sender_info['user']['profile_link'] ?? null;
             $db_mention->status = 'unread';
             
             $db_mention->column_id = $new_mentions_column->id;
