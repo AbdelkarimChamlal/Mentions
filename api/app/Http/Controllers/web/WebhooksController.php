@@ -20,8 +20,9 @@ class WebhooksController extends Controller
 
     public function slackWebhooks(Request $request)
     {
-        Log::alert($request);
         Log::info($request->all());
+        // log headers 
+        Log::info($request->headers->all());
         $challenge = $request->input('challenge');
         if($challenge){
             return response($challenge, 200)->header('content-type', 'text/plain');
