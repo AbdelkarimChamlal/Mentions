@@ -13,8 +13,12 @@ class SlackServices
 {
     public static function handleWebHooks($request)
     {
-        $events = $request->input('event');
-        Log::info($events);
+        $event = $request->input('event');
+        Log::info($event);
+        $text = $event['text'];
+        Log::info($text);
+        $mentions = self::extractMentions($text);
+        Log::info($mentions);
 
         // if($events){
         //     foreach($events as $event){
@@ -96,7 +100,7 @@ class SlackServices
 
 
 
-    private static function extract_mentions($body)
+    private static function extractMentions($body)
     {
         $mentions = [];
         $pattern = '/<@([a-zA-Z0-9_]+)>/';
