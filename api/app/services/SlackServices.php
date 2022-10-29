@@ -57,7 +57,7 @@ class SlackServices
             $db_mention->user_id = $account->user_id;
             $db_mention->account_id = $account->id;
             $db_mention->platform = 'slack';
-            $db_mention->platform_id = $mention;
+            $db_mention->platform_id = $event['client_msg_id'] ?? $event['ts'];
             $db_mention->content = $text;
             $db_mention->type = 'message';
 
