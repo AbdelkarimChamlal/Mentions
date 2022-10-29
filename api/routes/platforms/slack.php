@@ -104,7 +104,7 @@ Route::middleware('auth')->get('/callback', function(Request $request){
     $account->user_id = $user->id;
     $account->platform = 'slack';
     $account->platform_id = $slack_user['id'];
-    $account->username = $slack_user['real_name'];
+    $account->username = $slack_user['name'];
     $account->name = $slack_user['real_name'];
     $account->type = 'user';
     $account->status = 'active';
