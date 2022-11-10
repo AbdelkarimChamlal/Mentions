@@ -73,7 +73,7 @@ class GithubServices
     public function handle_webhook($request)
     {
         $payload = $request->all();
-        $payload = json_decode($payload, true);
+        // $payload = json_decode($payload, true);
         $event = $request->header('X-GitHub-Event');
 
         switch ($event) {
