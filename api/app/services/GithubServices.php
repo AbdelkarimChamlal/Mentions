@@ -117,7 +117,7 @@ class GithubServices
 
         $payload = isset($payload['payload']) ? $payload['payload'] : $payload;
 
-        Log::alert($payload);
+        $payload = json_decode(json_encode($payload), true);
 
         $action = $payload['action'];
 
