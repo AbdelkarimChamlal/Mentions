@@ -73,7 +73,6 @@ class GithubServices
     public function handle_webhook($request)
     {
         $payload = $request->all();
-        // $payload = json_decode($payload, true);
         $event = $request->header('X-GitHub-Event');
 
         switch ($event) {
@@ -115,7 +114,9 @@ class GithubServices
 
     private function handle_issue_comment($payload)
     {
-        $action = $payload['action'];
+        $action = $payload['action'] ?? null;
+
+        Log::alert("payload ",$payload);
 
         switch($action){
             case 'created':
