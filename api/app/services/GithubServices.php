@@ -118,7 +118,7 @@ class GithubServices
         $payload = isset($payload['payload']) ? $payload['payload'] : $payload;
         $action = $payload['action'] ?? null;
 
-        Log::alert("payload ",$payload);
+        // Log::alert("payload ",$payload);
 
         switch($action){
             case 'created':
