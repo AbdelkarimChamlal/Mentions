@@ -13,7 +13,6 @@ class WebhooksController extends Controller
 {
     public function githubWebhooks(Request $request,Github $github)
     {
-        Log::info($request->all());
         $github_service = new GithubServices($github);
         $github_service->handle_webhook($request);
         return response()->json(['success' => true]);
