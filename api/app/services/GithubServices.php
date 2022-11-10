@@ -2,12 +2,13 @@
 
 namespace App\services;
 
+use App\Models\User;
 use App\Models\Column;
 use App\Models\Account;
 use App\Models\Mention;
 use App\sdks\github\Github;
 use App\Events\ResourceUpdateEvent;
-use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class GithubServices
 {
@@ -114,6 +115,7 @@ class GithubServices
 
     private function handle_issue_comment($payload)
     {
+        Log::info($payload);
         $action = $payload['action'];
 
         switch($action){
