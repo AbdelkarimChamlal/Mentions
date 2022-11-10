@@ -72,7 +72,7 @@ class GithubServices
 
     public function handle_webhook($request)
     {
-        $payload = $request->getContent();
+        $payload = $request->all();
         $payload = json_decode($payload, true);
         $event = $request->header('X-GitHub-Event');
 
@@ -115,7 +115,6 @@ class GithubServices
 
     private function handle_issue_comment($payload)
     {
-        Log::info($payload);
         $action = $payload['action'];
 
         switch($action){
